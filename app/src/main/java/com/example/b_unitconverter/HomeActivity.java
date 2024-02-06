@@ -6,7 +6,9 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.health.connect.datatypes.units.Length;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 
 public class HomeActivity extends AppCompatActivity {
@@ -15,48 +17,78 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        /*
 
-        CardView lo = findViewById(R.id.Logout);
-        CardView  animalcaretaker = findViewById(R.id.animalcaretaker);
-        CardView news = findViewById(R.id.News);
-        CardView Equipment = findViewById(R.id.Equipment);
 
-        Equipment.setOnClickListener(new View.OnClickListener() {
+        CardView length = findViewById(R.id.Length);
+        CardView  data = findViewById(R.id.Data);
+        CardView time = findViewById(R.id.time);
+        CardView volume = findViewById(R.id.Volume);
+        View  Tip = findViewById(R.id.Tip);
+        CardView Temp = findViewById(R.id.Temperature);
+        CardView speed = findViewById(R.id.Speed);
+        CardView mass = findViewById(R.id.Mass);
+
+
+
+        length.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, Equipment.class));
-            }
-        });
-        animalcaretaker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(HomeActivity.this,animalCaretaker.class));
-
-            }
-
-        });
-        news.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,NewsActivity.class));
+               // startActivity(new Intent(HomeActivity.this, Equipment.class));
             }
         });
 
+        Tip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // startActivity(new Intent(HomeActivity.this, Equipment.class));
+            }
+        });
+        Temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  startActivity(new Intent(HomeActivity.this, Equipment.class));
+            }
+        });
+        speed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  startActivity(new Intent(HomeActivity.this, Equipment.class));
+            }
+        });
 
-        logOff.setOnClickListener(new View.OnClickListener() {
+
+
+        data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(HomeActivity.this, LoginActivityFirebase.class);
+            }
+        });
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+               // startActivity(new Intent(HomeActivity.this,animalCaretaker.class));
 
             }
-        });*/
+
+        });
+        mass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(HomeActivity.this,NewsActivity.class));
+            }
+        });
+
+
+        volume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
     }
 
 

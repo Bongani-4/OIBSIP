@@ -11,7 +11,7 @@
         android:id="@+id/textViewHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" B Unit converter Calculations"
+        android:text=" B Unit converter"
         android:textColor="#092FB8"
         android:textColorLink="#151313"
         android:textSize="24sp"
@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
-
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -70,6 +69,8 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Data"
+
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
                     android:textStyle="bold" />
@@ -112,6 +113,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Mass"
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
                     android:textStyle="bold" />
@@ -150,6 +152,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Tip"
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
                     android:textStyle="bold" />
@@ -192,6 +195,7 @@
                     android:text="Speed"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -229,6 +233,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Time"
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
                     android:textStyle="bold" />
@@ -266,11 +271,12 @@
 
 
                 <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="20sp"
+                    android:layout_width="125dp"
+                    android:layout_height="22.5dp"
                     android:text="Temperature"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
+                    android:textSize="18.5sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -307,6 +313,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Volume"
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
                     android:textStyle="bold" />
@@ -345,6 +352,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="Length"
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     android:textColor="#092FB8"
                     android:textStyle="bold" />
