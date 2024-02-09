@@ -8,18 +8,22 @@
 
 
     <EditText
+
+        android:id="@+id/editmetre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-275dp"
-        android:layout_gravity="center_vertical"
-        android:hint="0.00mm"/>
-
+        android:layout_gravity="end"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/white"
+        android:textColorHint="#6A6666"
+        android:hint="Enter value here" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text=" Convert Length "
+        android:text="Convert length"
         android:textColor="@color/black"
 
         android:textSize="30sp" />
@@ -28,14 +32,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-160dp"
         android:orientation="vertical">
 
 
         <TextView
+            android:id="@+id/millimetre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
+            android:layout_marginEnd="80dp"
             android:hint="0.00"
             android:textColor="#F2293C87"
             android:textSize="15sp"
@@ -43,6 +48,7 @@
             />
 
         <TextView
+            android:id="@+id/centmetre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
@@ -51,6 +57,7 @@
             android:layout_marginTop="15dp"
             />
         <TextView
+            android:id="@+id/metre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
@@ -59,6 +66,7 @@
             android:layout_marginTop="15dp"
             />
         <TextView
+            android:id="@+id/kilometre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
@@ -67,6 +75,7 @@
             android:layout_marginTop="15dp"
             />
         <TextView
+            android:id="@+id/inches"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
@@ -75,6 +84,7 @@
             android:layout_marginTop="15dp"
             />
         <TextView
+            android:id="@+id/feet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
@@ -87,12 +97,13 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-160dp"
+        android:layout_marginEnd="-50dp"
         android:orientation="vertical">
 
 
@@ -103,7 +114,7 @@
             android:id="@+id/mm"
             android:layout_marginRight="80dp"
             android:text="mm"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
 
             />
@@ -122,7 +133,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/m"
             android:text="m"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:layout_marginTop="15dp"
             />
@@ -159,6 +170,7 @@
 
 
     </LinearLayout>
+    <include layout="@layout/numeric_keyboard"/>
 
 
 </FrameLayout>

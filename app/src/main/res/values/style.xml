@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="textAllCaps">false</item>
+    </style>
+
+</resources>

@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-275dp"
         android:layout_gravity="center_vertical"
-        android:hint="0.00mm"/>
+        android:hint="0.00ft"/>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text=" Convert Length "
+        android:text="Length calculations"
         android:textColor="@color/black"
 
         android:textSize="30sp" />
@@ -87,7 +87,7 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,12 +98,12 @@
 
         <TextView
 
+            android:id="@+id/mm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mm"
             android:layout_marginRight="80dp"
             android:text="mm"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
 
             />
@@ -150,7 +150,7 @@
             android:text="ft"
             android:textSize="15sp"
             android:id="@+id/ft"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginTop="15dp"
             />
 

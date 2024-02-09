@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         length.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // startActivity(new Intent(HomeActivity.this, Equipment.class));
+               startActivity(new Intent(HomeActivity.this, lengthConverterActivity.class));
             }
         });
 

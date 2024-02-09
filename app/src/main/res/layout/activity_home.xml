@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="#A34E4A4A">
 
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" B Unit converter"
-        android:textColor="#092FB8"
+        android:textColor="#080809"
         android:textColorLink="#151313"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -72,7 +72,7 @@
 
                     android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -115,7 +115,7 @@
                     android:text="Mass"
                     android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -154,7 +154,7 @@
                     android:text="Tip"
                     android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:text="Speed"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -235,7 +235,7 @@
                     android:text="Time"
                     android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -275,7 +275,7 @@
                     android:layout_height="22.5dp"
                     android:text="Temperature"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textSize="18.5sp"
                     android:textStyle="bold" />
 
@@ -315,7 +315,7 @@
                     android:text="Volume"
                     android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#FF080809"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -354,7 +354,7 @@
                     android:text="Length"
                     android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="#092FB8"
+                    android:textColor="#080809"
                     android:textStyle="bold" />
 
             </LinearLayout>

@@ -1,9 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
-    <style name="Base.Theme.B_UnitConverter" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.FarmGuardian" parent="Theme.Material3.DayNight.NoActionBar">
+
     </style>
 
-    <style name="Theme.B_UnitConverter" parent="Base.Theme.B_UnitConverter" />
+
+    <style name="AppTheme" parent="Base.Theme.FarmGuardian">
+
+        <item name="android:statusBarColor">#A34E4A4A</item>
+    </style>
+
+    <style name="Theme.FarmGuardian" parent="Base.Theme.FarmGuardian" />
 </resources>

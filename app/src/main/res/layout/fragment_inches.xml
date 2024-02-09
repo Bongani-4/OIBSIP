@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-275dp"
         android:layout_gravity="center_vertical"
-        android:hint="0.00mm"/>
+        android:hint="0.00in"/>
 
 
     <TextView
@@ -87,7 +87,7 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
             android:id="@+id/mm"
             android:layout_marginRight="80dp"
             android:text="mm"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
 
             />
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:text="in"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:id="@+id/in"
             android:layout_marginTop="15dp"
             />

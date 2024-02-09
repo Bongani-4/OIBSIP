@@ -4,13 +4,14 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:theme="@style/AppTheme"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logoicon"
-        android:label="Units"
+        android:icon="@drawable/app_icon"
+        android:label="Convert"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.B_UnitConverter"
         tools:targetApi="31" >
         <activity
             android:name=".lengthConverterActivity"
