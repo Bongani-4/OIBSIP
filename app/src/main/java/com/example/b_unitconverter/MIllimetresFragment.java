@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +54,11 @@ public class MIllimetresFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+    public void onNumericKeyPressed(View view) {
+        Button button = (Button) view;
+        String key = button.getText().toString();
+        //inputMeters.append(key);
     }
 
     @Override

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A34E4A4A"
-    tools:context=".MIllimetresFragment">
+    tools:context=".MetreFragment">
 
 
     <EditText
@@ -43,7 +43,7 @@
             android:layout_marginEnd="80dp"
             android:hint="0.00"
             android:textColor="#F2293C87"
-            android:textSize="15sp"
+            android:textSize="20sp"
 
             />
 
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="#F2293C87"
             android:layout_marginTop="15dp"
             />
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="#F2293C87"
             android:layout_marginTop="15dp"
             />
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:hint="0.00"
             android:textColor="#F2293C87"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:layout_marginTop="15dp"
             />
         <TextView
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="#F2293C87"
             android:layout_marginTop="15dp"
             />
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="#F2293C87"
             android:layout_marginTop="15dp"
             />
@@ -115,7 +115,8 @@
             android:layout_marginRight="80dp"
             android:text="mm"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="20sp"
+
 
             />
 
@@ -124,7 +125,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/cm"
             android:text="cm"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_marginTop="15dp"
             />
@@ -134,7 +135,7 @@
             android:id="@+id/m"
             android:text="m"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:layout_marginTop="15dp"
             />
         <TextView
@@ -142,15 +143,16 @@
             android:layout_height="wrap_content"
             android:text="km"
             android:id="@+id/km"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_marginTop="15dp"
+
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="in"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
             android:id="@+id/in"
             android:layout_marginTop="15dp"
@@ -159,10 +161,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ft"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:id="@+id/ft"
             android:textColor="@color/black"
             android:layout_marginTop="15dp"
+
+
             />
 
 
