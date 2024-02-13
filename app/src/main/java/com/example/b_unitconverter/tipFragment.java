@@ -7,13 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FeetFragment#newInstance} factory method to
+ * Use the {@link tipFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FeetFragment extends Fragment {
+public class tipFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +25,7 @@ public class FeetFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FeetFragment() {
+    public tipFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +35,11 @@ public class FeetFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FeetFragment.
+     * @return A new instance of fragment tipFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FeetFragment newInstance(String param1, String param2) {
-        FeetFragment fragment = new FeetFragment();
+    public static tipFragment newInstance(String param1, String param2) {
+        tipFragment fragment = new tipFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -54,11 +55,16 @@ public class FeetFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    public void onNumericKeyPressed(View view) {
+        Button button = (Button) view;
+        String key = button.getText().toString();
+        //inputMeters.append(key);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feet, container, false);
+        return inflater.inflate(R.layout.fragment_tip, container, false);
     }
 }

@@ -3,12 +3,8 @@ package com.example.b_unitconverter;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
-import android.health.connect.datatypes.units.Length;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 
 public class HomeActivity extends AppCompatActivity {
@@ -33,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         length.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(HomeActivity.this, lengthConverterActivity.class));
+               startActivity(new Intent(HomeActivity.this, ConverterActivity.class));
             }
         });
 

@@ -3,85 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A34E4A4A"
-    tools:context=".MIllimetresFragment">
+    android:background="#F5EFEAEA"
+    tools:context=".lengthFragment">
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-275dp"
-        android:layout_gravity="center_vertical"
-        android:hint="0.00ft"/>
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/mass"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_gravity="end"
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:text="Length calculations"
-        android:textColor="@color/black"
-
-        android:textSize="30sp" />
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-195dp"
         android:orientation="vertical">
 
 
-        <TextView
+        <EditText
+            android:id="@+id/tons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="25dp"
             android:hint="0.00"
-            android:textColor="#F2293C87"
-            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
 
             />
 
-        <TextView
+        <EditText
+            android:id="@+id/pounds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
-            android:textColor="#F2293C87"
+            android:textSize="20sp"
+            android:textColor="@color/black"
             android:layout_marginTop="15dp"
             />
-        <TextView
+        <EditText
+            android:id="@+id/ounces"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
-            android:textColor="#F2293C87"
+            android:textSize="20sp"
+            android:textColor="@color/white"
             android:layout_marginTop="15dp"
             />
-        <TextView
+        <EditText
+            android:id="@+id/kilogram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textColor="#F2293C87"
-            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:layout_marginTop="15dp"
             />
-        <TextView
+        <EditText
+            android:id="@+id/grams"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0.00"
-            android:textSize="15sp"
-            android:textColor="#F2293C87"
+            android:textSize="20sp"
+            android:textColor="@color/black"
             android:layout_marginTop="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="0.00"
-            android:textSize="15sp"
-            android:textColor="#F2293C87"
-            android:layout_marginTop="15dp"
-            />
+
 
 
 
@@ -92,19 +85,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-250dp"
+        android:layout_marginRight="-60dp"
+
         android:orientation="vertical">
 
 
         <TextView
-
-            android:id="@+id/mm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="145dp"
+
+            android:id="@+id/t"
             android:layout_marginRight="80dp"
-            android:text="mm"
+            android:text="t"
             android:textColor="@color/black"
-            android:textSize="15sp"
+            android:textSize="20sp"
+
 
             />
 
@@ -112,53 +110,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cm"
-            android:text="cm"
-            android:textSize="15sp"
+            android:text="lb"
+            android:textSize="20sp"
             android:textColor="@color/black"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="38dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/m"
-            android:text="m"
+            android:text="oz"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:layout_marginTop="38dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="km"
+            android:text="kg"
             android:id="@+id/km"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="35dp"
+
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="in"
-            android:textSize="15sp"
+            android:text="g"
+            android:textSize="20sp"
             android:textColor="@color/black"
             android:id="@+id/in"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="38dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ft"
-            android:textSize="15sp"
-            android:id="@+id/ft"
-            android:textColor="@color/white"
-            android:layout_marginTop="15dp"
-            />
+
 
 
 
 
 
     </LinearLayout>
+    <include layout="@layout/numeric_keyboard"/>
 
 
 </FrameLayout>

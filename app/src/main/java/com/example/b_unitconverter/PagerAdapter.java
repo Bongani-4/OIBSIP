@@ -4,13 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.b_unitconverter.CentiimetreFragment;
-import com.example.b_unitconverter.FeetFragment;
-import com.example.b_unitconverter.InchesFragment;
-import com.example.b_unitconverter.KilometreFragment;
-import com.example.b_unitconverter.MIllimetresFragment;
-import com.example.b_unitconverter.MetreFragment;
-
 public class PagerAdapter extends FragmentPagerAdapter {
 
     public PagerAdapter(FragmentManager fm) {
@@ -22,17 +15,19 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return new CentiimetreFragment();
+                return new lengthFragment();
             case 1:
-                return new MIllimetresFragment();
+                return new dataFragment();
             case 2:
-                return new MetreFragment();
+                return new timeFragment();
             case 3:
-                return new KilometreFragment();
+                return new massFragment();
             case 4:
-                return new InchesFragment();
+                return new volumeFragment();
             case 5:
-                return new FeetFragment();
+                return new temperatureFragment();
+            case 6:
+                 return new tipFragment();
             default:
                 return null;
         }
@@ -41,25 +36,29 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
 
-        return 6;
+        return 7;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
                switch (position) {
             case 0:
-                return "Centimeters";
+                return "Length";
             case 1:
-                return "Millimeters";
+                return "Data";
             case 2:
-                return "Meters";
+                return "Time";
             case 3:
-                return "Kilometers";
+                return "Mass";
             case 4:
-                return "Inches";
+                return "Volume";
 
             case 5:
-                return "Feet";
+                return "Temperature";
+            case 6:
+                return "Tip";
+
+
             default:
                 return null;
         }

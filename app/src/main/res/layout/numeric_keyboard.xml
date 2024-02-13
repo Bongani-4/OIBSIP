@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A34E4A4A"
-    tools:context=".MetreFragment">
+    tools:context=".lengthFragment">
 
 <GridLayout
     android:id="@+id/numericKeyboard"
     android:layout_width="380dp"
-    android:layout_height="390dp"
+    android:layout_height="360dp"
     android:rowCount="4"
     android:columnCount="3"
     android:layout_gravity="center"
     android:layout_marginStart="1dp"
     android:layout_marginEnd="2dp"
-    android:background="@color/white"
-    android:layout_marginBottom="-165dp"
+    android:background="#E8555252"
+    android:layout_marginBottom="-178dp"
     >
 
     <Button
