@@ -83,14 +83,10 @@ public class lengthFragment extends Fragment {
         resultInches.setInputType(InputType.TYPE_NULL);
         resultFeet.setInputType(InputType.TYPE_NULL);
 
+        setupTextWatchers();
+
  //click listeners for all edittexts
 
-
-
-
-
-
-        setupTextWatchers();
 
 
 
@@ -240,8 +236,85 @@ public class lengthFragment extends Fragment {
                 // No implementation yet
             }
         });
+        resultCentimeters.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        // TextWatchers for other EditText fields
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!converting) {
+                    updateValuesFromCentimeters();
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        resultFeet.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!converting) {
+                    updateValuesFromFeet();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        resultInches.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!converting) {
+                    updateValuesFromInches();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        resultKilometers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!converting) {
+                    updateValuesFromKilometers();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
     }
 
 
@@ -296,7 +369,7 @@ public class lengthFragment extends Fragment {
                 double feet = millimetersValue / 304.8;
 
 
-                resultmetre.setText(String.format(Locale.US,"%.2f", meters));
+                resultmetre.setText(String.valueOf(meters));
                 resultCentimeters.setText(String.format(Locale.US, "%.2f", centimeters));
                 resultKilometers.setText(String.format(Locale.US, "%.2f", kilometers));
                 resultInches.setText(String.format(Locale.US, "%.2f", inches));
@@ -365,5 +438,124 @@ public class lengthFragment extends Fragment {
         }
 
 
-    }}
+    }
+    private void updateValuesFromCentimeters() {
+        converting = true;
+        String centimetersStr = resultCentimeters.getText().toString();
+        if (!centimetersStr.isEmpty()) {
+            try {
+                double centimetersValue = Double.parseDouble(centimetersStr);
+
+                double meters = centimetersValue / 100;
+                double millimeters = centimetersValue * 10;
+                double kilometers = centimetersValue / 100000;
+                double inches = centimetersValue / 2.54;
+                double feet = centimetersValue / 30.48;
+
+                resultmetre.setText(String.format(Locale.US, "%.2f", meters));
+                resultMillimeters.setText(String.format(Locale.US, "%.2f", millimeters));
+                resultKilometers.setText(String.format(Locale.US, "%.2f", kilometers));
+                resultInches.setText(String.format(Locale.US, "%.2f", inches));
+                resultFeet.setText(String.format(Locale.US, "%.2f", feet));
+
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid centimeter value", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            } finally {
+                converting = false;
+            }
+        }
+        Log.d("Converter", "updateValuesFromCentimeters() finished");
+    }
+    private void updateValuesFromKilometers() {
+        converting = true;
+        String kilometersStr = resultKilometers.getText().toString();
+        if (!kilometersStr.isEmpty()) {
+            try {
+                double kilometersValue = Double.parseDouble(kilometersStr);
+
+                double meters = kilometersValue * 1000;
+                double millimeters = kilometersValue * 1_000_000;
+                double centimeters = kilometersValue * 100_000;
+                double inches = kilometersValue * 39370.1;
+                double feet = kilometersValue * 3280.84;
+
+                resultmetre.setText(String.format(Locale.US, "%.2f", meters));
+                resultMillimeters.setText(String.format(Locale.US, "%.2f", millimeters));
+                resultCentimeters.setText(String.format(Locale.US, "%.2f", centimeters));
+                resultInches.setText(String.format(Locale.US, "%.2f", inches));
+                resultFeet.setText(String.format(Locale.US, "%.2f", feet));
+
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid kilometer value", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            } finally {
+                converting = false;
+            }
+        }
+        Log.d("Converter", "updateValuesFromKilometers() finished");
+    }
+    private void updateValuesFromInches() {
+        converting = true;
+        String inchesStr = resultInches.getText().toString();
+        if (!inchesStr.isEmpty()) {
+            try {
+                double inchesValue = Double.parseDouble(inchesStr);
+
+                double meters = inchesValue * 0.0254;
+                double millimeters = inchesValue * 25.4;
+                double centimeters = inchesValue * 2.54;
+                double kilometers = inchesValue * 0.0000254;
+                double feet = inchesValue * 0.0833333;
+
+                resultmetre.setText(String.format(Locale.US, "%.2f", meters));
+                resultMillimeters.setText(String.format(Locale.US, "%.2f", millimeters));
+                resultCentimeters.setText(String.format(Locale.US, "%.2f", centimeters));
+                resultKilometers.setText(String.format(Locale.US, "%.6f", kilometers));
+                resultFeet.setText(String.format(Locale.US, "%.2f", feet));
+
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid inches value", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            } finally {
+                converting = false;
+            }
+        }
+        Log.d("Converter", "updateValuesFromInches() finished");
+    }
+    private void updateValuesFromFeet() {
+        converting = true;
+        String feetStr = resultFeet.getText().toString();
+        if (!feetStr.isEmpty()) {
+            try {
+                double feetValue = Double.parseDouble(feetStr);
+
+                double meters = feetValue * 0.3048;
+                double millimeters = feetValue * 304.8;
+                double centimeters = feetValue * 30.48;
+                double kilometers = feetValue * 0.0003048;
+                double inches = feetValue * 12;
+
+                resultmetre.setText(String.format(Locale.US, "%.2f", meters));
+                resultMillimeters.setText(String.format(Locale.US, "%.2f", millimeters));
+                resultCentimeters.setText(String.format(Locale.US, "%.2f", centimeters));
+                resultKilometers.setText(String.format(Locale.US, "%.6f", kilometers));
+                resultInches.setText(String.format(Locale.US, "%.2f", inches));
+
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid feet value", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            } finally {
+                converting = false;
+            }
+        }
+        Log.d("Converter", "updateValuesFromFeet() finished");
+    }
+
+
+
+
+}//for 0.00 fix strirngformat
+
+
 
