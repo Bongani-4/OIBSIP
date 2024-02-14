@@ -23,9 +23,7 @@ import java.util.Locale;
 
 public class lengthFragment extends Fragment {
 
-    private EditText resultmetre, resultMillimeters, resultCentimeters, resultKilometers,
-
-            resultInches, resultFeet;
+    private EditText resultmetre, resultMillimeters, resultCentimeters, resultKilometers, resultInches, resultFeet;
     private boolean converting = false;
 
 
@@ -87,10 +85,7 @@ public class lengthFragment extends Fragment {
 
         setupTextWatchers();
 
-        //click listeners for all edittexts
-
-
-
+        //click listeners for keyboard buttons
 
         buttonOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,23 +171,6 @@ public class lengthFragment extends Fragment {
 
         return view;
     }
-    private void clearAllEditTexts() {
-
-        // Clear all EditText fields
-        resultmetre.setText(String.valueOf(0));
-        resultMillimeters.setText(String.valueOf(0));
-        resultCentimeters.setText(String.valueOf(0));
-        resultKilometers.setText(String.valueOf(0));
-        resultInches.setText(String.valueOf(0));
-        resultFeet.setText(String.valueOf(0));
-
-
-
-    }
-
-
-
-
 
 
 
@@ -318,8 +296,42 @@ public class lengthFragment extends Fragment {
 
 
     }
+    private void setButtonBackgroundColor(View parentView, int buttonId) {
+        Button button = parentView.findViewById(buttonId);
+        button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
+
+    }
+    private void clearAllEditTexts() {
+
+        // Clear all EditText fields
+        resultmetre.setText(String.valueOf(0));
+        resultMillimeters.setText(String.valueOf(0));
+        resultCentimeters.setText(String.valueOf(0));
+        resultKilometers.setText(String.valueOf(0));
+        resultInches.setText(String.valueOf(0));
+        resultFeet.setText(String.valueOf(0));
+
+    }
+    private void handleBackspace() {
+        View focusedView = requireActivity().getCurrentFocus();
+
+        if (focusedView instanceof EditText) {
+            EditText editText = (EditText) focusedView;
+            Editable editable = editText.getText();
+            int length = editable.length();
+
+            if (length > 1) {
+                editable.delete(length - 1, length);
+            } else {
+                clearAllEditTexts();
+            }
+
+        }
 
 
+    }
+
+//calculation logic
     private void convert() {
         converting = true;
 
@@ -394,10 +406,7 @@ public class lengthFragment extends Fragment {
 
 
 
-    private void setButtonBackgroundColor(View parentView, int buttonId) {
-        Button button = parentView.findViewById(buttonId);
-        button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
-    }
+
 
     public void onNumericKeyPressed(View view) {
         if (view instanceof Button) {
@@ -431,24 +440,7 @@ public class lengthFragment extends Fragment {
             }
         }
     }
-    private void handleBackspace() {
-        View focusedView = requireActivity().getCurrentFocus();
 
-        if (focusedView instanceof EditText) {
-            EditText editText = (EditText) focusedView;
-            Editable editable = editText.getText();
-            int length = editable.length();
-
-            if (length > 1) {
-                editable.delete(length - 1, length);
-            } else {
-                clearAllEditTexts();
-            }
-
-        }
-
-
-    }
     private void updateValuesFromCentimeters() {
         converting = true;
         String centimetersStr = resultCentimeters.getText().toString();
