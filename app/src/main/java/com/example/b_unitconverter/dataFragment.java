@@ -251,7 +251,7 @@ public class dataFragment extends Fragment {
 
             }
         });
-        tebibyte.addTextChangedListener(new TextWatcher() {
+        terabyte.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -514,20 +514,20 @@ public class dataFragment extends Fragment {
 
         if (!tebibytesStr.isEmpty()) {
             try {
-                double tebibytesValue = Double.parseDouble(tebibytesStr);
+                float tebibytesValue = Float.parseFloat(tebibytesStr);
 
                 long bytes = (long) (tebibytesValue * 1_099_511_627_776L); // 2^40
                 double bits = bytes * 8;
-                long kilobytes = (long) (tebibytesValue * 1_073_741_824L); // 2^30
-                long megabytes = (long) (tebibytesValue * 1_048_576L); // 2^20
-                long gigabytes = (long) (tebibytesValue * 1024L); // 2^10
-                double terabytes = tebibytesValue / 1024; // 2^(-10)
+                float kilobytes = (tebibytesValue * 1_073_741_824L); // 2^30
+                float megabytes = (tebibytesValue * 1_048_576L); // 2^20
+                float gigabytes = (tebibytesValue * 1024L); // 2^10
+                float terabytes = tebibytesValue / 1024; // 2^(-10)
 
                 bit.setText(String.format(Locale.US, "%.2f", bits));
                 kilobyte.setText(String.format(Locale.US, "%.2f", kilobytes));
                 megabyte.setText(String.format(Locale.US, "%.2f", megabytes));
                 gigabyte.setText(String.format(Locale.US, "%.2f", gigabytes));
-                terabyte.setText(String.format(Locale.US, "%.6f", terabytes));
+                terabyte.setText(String.format(Locale.US, "%.2f", terabytes));
 
             } catch (NumberFormatException e) {
                 Toast.makeText(getContext(), "Invalid tebibyte value", Toast.LENGTH_SHORT).show();
