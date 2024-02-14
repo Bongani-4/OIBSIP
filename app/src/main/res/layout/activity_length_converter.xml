@@ -11,8 +11,9 @@
       android:layout_width="match_parent"
       android:layout_height="65dp"
       android:layout_alignParentTop="true"
-      android:background="#D1C70B"
-      style="@style/CustomTabLayout"/>
+      style="@style/CustomTabLayouts"
+      app:layout_constraintTop_toTopOf="parent"
+      app:tabMode="scrollable" />
 
 
   <androidx.viewpager.widget.ViewPager

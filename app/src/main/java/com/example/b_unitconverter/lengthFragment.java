@@ -24,6 +24,7 @@ import java.util.Locale;
 public class lengthFragment extends Fragment {
 
     private EditText resultmetre, resultMillimeters, resultCentimeters, resultKilometers,
+
             resultInches, resultFeet;
     private boolean converting = false;
 
@@ -59,7 +60,7 @@ public class lengthFragment extends Fragment {
         Button button0 = view.findViewById(R.id.zero);
         Button buttoncomma = view.findViewById(R.id.comma);
         ImageView back = view.findViewById(R.id.backspace);
-         Button clear = view.findViewById(R.id.clearButton);
+        Button clear = view.findViewById(R.id.clearButton);
 
         //numerical calculator buttons colors
 
@@ -74,6 +75,7 @@ public class lengthFragment extends Fragment {
         setButtonBackgroundColor(view, R.id.nine);
         setButtonBackgroundColor(view, R.id.zero);
         setButtonBackgroundColor(view, R.id.comma);
+        setButtonBackgroundColor(view,R.id.clearButton);
 
 
         resultmetre.setInputType(InputType.TYPE_NULL);
@@ -85,7 +87,7 @@ public class lengthFragment extends Fragment {
 
         setupTextWatchers();
 
- //click listeners for all edittexts
+        //click listeners for all edittexts
 
 
 
@@ -403,24 +405,32 @@ public class lengthFragment extends Fragment {
             String key = button.getText().toString();
 
 
-
-            if(view.getId() == R.id.metre)
-            {
+            if (view.getId() == R.id.metre) {
                 resultmetre.requestFocus();
-            }
-                else if (view.getId() == R.id.millimetre) {
+            } else if (view.getId() == R.id.millimetre) {
                 resultMillimeters.requestFocus();
             }
 
-            // Append the numeric key to the focused EditText
+            //set the numeric key to the focused EditText
             View focusedView = requireActivity().getCurrentFocus();
             if (focusedView instanceof EditText) {
-                ((EditText) focusedView).append(key);
+                EditText focusedEditText = (EditText) focusedView;
+
+                if (focusedEditText.getText().toString().equals("0.0") || focusedEditText.getText().toString().equals("0")   || focusedEditText.getText().toString().equals("0.00")) {
+                    focusedEditText.setText(key);
+                } else {
+                    if (focusedEditText.getText().toString().length() < 15) {
+
+                        focusedEditText.append(key);
+                    }else{
+                        Toast.makeText(getContext(), "Maximum character limit reached", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
             }
         }
-
-}
-
+    }
     private void handleBackspace() {
         View focusedView = requireActivity().getCurrentFocus();
 
@@ -465,7 +475,7 @@ public class lengthFragment extends Fragment {
                 converting = false;
             }
         }
-        Log.d("Converter", "updateValuesFromCentimeters() finished");
+
     }
     private void updateValuesFromKilometers() {
         converting = true;
@@ -493,7 +503,7 @@ public class lengthFragment extends Fragment {
                 converting = false;
             }
         }
-        Log.d("Converter", "updateValuesFromKilometers() finished");
+
     }
     private void updateValuesFromInches() {
         converting = true;
@@ -521,7 +531,7 @@ public class lengthFragment extends Fragment {
                 converting = false;
             }
         }
-        Log.d("Converter", "updateValuesFromInches() finished");
+
     }
     private void updateValuesFromFeet() {
         converting = true;
@@ -539,7 +549,7 @@ public class lengthFragment extends Fragment {
                 resultmetre.setText(String.format(Locale.US, "%.2f", meters));
                 resultMillimeters.setText(String.format(Locale.US, "%.2f", millimeters));
                 resultCentimeters.setText(String.format(Locale.US, "%.2f", centimeters));
-                resultKilometers.setText(String.format(Locale.US, "%.6f", kilometers));
+                resultKilometers.setText(String.format(Locale.US, "%.2f", kilometers));
                 resultInches.setText(String.format(Locale.US, "%.2f", inches));
 
             } catch (NumberFormatException e) {
@@ -549,13 +559,10 @@ public class lengthFragment extends Fragment {
                 converting = false;
             }
         }
-        Log.d("Converter", "updateValuesFromFeet() finished");
+
     }
 
 
 
 
-}//for 0.00 fix strirngformat
-
-
-
+}
