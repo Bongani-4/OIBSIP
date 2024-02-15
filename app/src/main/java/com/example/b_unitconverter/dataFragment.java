@@ -86,74 +86,7 @@ public class dataFragment extends Fragment {
         setupTextWatchers();
 
         //click listeners for keyboard buttons
-
-        buttonOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        buttonTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-
-        });
-        button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        buttoncomma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
+        setupNumericButtons(view, R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.comma);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +103,20 @@ public class dataFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void setupNumericButtons(View view, int... buttonIds) {
+        for (int buttonId : buttonIds) {
+            Button button = view.findViewById(buttonId);
+            setButtonBackgroundColor(view, buttonId);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onNumericKeyPressed(v);
+                }
+            });
+        }
     }
 
 

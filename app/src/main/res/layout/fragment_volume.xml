@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5EFEAEA"
-    tools:context=".lengthFragment">
+    tools:context=".volumeFragment">
 
 
 
@@ -17,6 +17,18 @@
         android:layout_gravity="end"
 
         />
+    <Button
+        android:id="@+id/clearButtonV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear All"
+        android:onClick="onClearButtonClick"
+        android:layout_gravity="end"
+        android:layout_marginTop="300dp"
+
+
+        />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -53,7 +65,7 @@
             android:layout_height="wrap_content"
             android:hint="0.00"
             android:textSize="20sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginTop="15dp"
             />
 

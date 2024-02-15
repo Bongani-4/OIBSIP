@@ -46,34 +46,12 @@ public class lengthFragment extends Fragment {
 
         //numerical calculator buttons
 
-        Button buttonOne = view.findViewById(R.id.one);
-        Button buttonTwo = view.findViewById(R.id.two);
-        Button button3 = view.findViewById(R.id.three);
-        Button button4 = view.findViewById(R.id.four);
-        Button button5 = view.findViewById(R.id.five);
-        Button button6 = view.findViewById(R.id.six);
-        Button button7 = view.findViewById(R.id.seven);
-        Button button8 = view.findViewById(R.id.eight);
-        Button button9 = view.findViewById(R.id.nine);
-        Button button0 = view.findViewById(R.id.zero);
-        Button buttoncomma = view.findViewById(R.id.comma);
+
         ImageView back = view.findViewById(R.id.backspace);
         Button clear = view.findViewById(R.id.clearButton);
 
         //numerical calculator buttons colors
 
-        setButtonBackgroundColor(view, R.id.one);
-        setButtonBackgroundColor(view, R.id.two);
-        setButtonBackgroundColor(view, R.id.three);
-        setButtonBackgroundColor(view, R.id.four);
-        setButtonBackgroundColor(view, R.id.five);
-        setButtonBackgroundColor(view, R.id.six);
-        setButtonBackgroundColor(view, R.id.seven);
-        setButtonBackgroundColor(view, R.id.eight);
-        setButtonBackgroundColor(view, R.id.nine);
-        setButtonBackgroundColor(view, R.id.zero);
-        setButtonBackgroundColor(view, R.id.comma);
-        setButtonBackgroundColor(view,R.id.clearButton);
 
 
         resultmetre.setInputType(InputType.TYPE_NULL);
@@ -86,74 +64,9 @@ public class lengthFragment extends Fragment {
         setupTextWatchers();
 
         //click listeners for keyboard buttons
+        setupNumericButtons(view, R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.comma);
 
-        buttonOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        buttonTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
 
-        });
-        button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        button0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
-        buttoncomma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNumericKeyPressed(v);
-            }
-        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +83,21 @@ public class lengthFragment extends Fragment {
 
 
         return view;
+    }
+
+
+    private void setupNumericButtons(View view, int... buttonIds) {
+        for (int buttonId : buttonIds) {
+            Button button = view.findViewById(buttonId);
+            setButtonBackgroundColor(view, buttonId);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onNumericKeyPressed(v);
+                }
+            });
+        }
     }
 
 
@@ -331,7 +259,7 @@ public class lengthFragment extends Fragment {
 
     }
 
-//calculation logic
+    //calculation logic
     private void convert() {
         converting = true;
 

@@ -3,7 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5EFEAEA"
-    tools:context=".dataFragment">
+    tools:context=".temperatureFragment">
 
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5EFEAEA"
+        tools:context=".tipFragment">
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/editTextBillAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Bill Amount"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="16dp"/>
+
+            <SeekBar
+                android:id="@+id/seekBarTipPercentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="15"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/textViewTipPercentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tip Percentage: 15%"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/buttonCalculate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculate Tip"/>
+
+            <TextView
+                android:id="@+id/textViewTotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Amount: $0.00"
+                android:gravity="center"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+
+    </FrameLayout>
 </FrameLayout>

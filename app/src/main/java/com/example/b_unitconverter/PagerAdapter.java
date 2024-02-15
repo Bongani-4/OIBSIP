@@ -1,21 +1,17 @@
-// PagerAdapter.java
 package com.example.b_unitconverter;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class PagerAdapter extends FragmentStateAdapter {
 
-    public PagerAdapter(FragmentManager fm) {
-        super(fm);
+    public PagerAdapter(FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
     }
 
     @Override
-    public Fragment getItem(int position) {
-
+    public Fragment createFragment(int position) {
         switch (position) {
             case 0:
                 return new lengthFragment();
@@ -30,21 +26,20 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 5:
                 return new temperatureFragment();
             case 6:
-                 return new tipFragment();
+                return new tipFragment();
             default:
                 return null;
         }
     }
 
     @Override
-    public int getCount() {
-
+    public int getItemCount() {
         return 7;
     }
 
-    @Override
+
     public CharSequence getPageTitle(int position) {
-               switch (position) {
+        switch (position) {
             case 0:
                 return "Length";
             case 1:
