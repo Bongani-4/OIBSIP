@@ -1,3 +1,5 @@
+git clone https://github.com/Bongani-4/OIBSIP.git
+
 ## Quick instructions
 
 1. Open android studio
