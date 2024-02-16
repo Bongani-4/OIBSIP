@@ -14,7 +14,7 @@ Oasis Infobyte internship ( Android Application Development)
 
 This app allows users to convert various units of measurement, including data,length,mass,volume and temperature etc. It provides a user-friendly interface and supports easy input through a custom numeric keyboard.
 
-## Current Screeenshots
+##  Screeenshots
 
 
 <p align="center">
