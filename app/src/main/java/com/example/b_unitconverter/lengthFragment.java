@@ -49,7 +49,7 @@ public class lengthFragment extends Fragment {
 
         ImageView back = view.findViewById(R.id.backspace);
         Button clear = view.findViewById(R.id.clearButton);
-
+        clear.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
         //numerical calculator buttons colors
 
 

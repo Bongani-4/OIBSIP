@@ -43,6 +43,7 @@ public class timeFragment extends Fragment {
 
         ImageView back = view.findViewById(R.id.backspace);
         Button clear = view.findViewById(R.id.clearButtonT);
+        clear.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
 
         //numerical calculator buttons colors
 

@@ -42,6 +42,7 @@ public class volumeFragment extends Fragment {
 
         ImageView back = view.findViewById(R.id.backspace);
         Button clear = view.findViewById(R.id.clearButtonV);
+        clear.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
 
         //numerical calculator buttons colors
 

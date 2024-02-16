@@ -25,7 +25,7 @@ public class temperatureFragment extends Fragment {
 
     private EditText celcious, fahranheit, kelvin;
     private boolean converting = false;
-    private ImageView minus;
+
 
 
     @Nullable
@@ -40,35 +40,14 @@ public class temperatureFragment extends Fragment {
 
         //numerical calculator buttons
 
-        ImageView back = view.findViewById(R.id.backspace);
         Button clear = view.findViewById(R.id.clearButtonTMP);
-        minus = view.findViewById(R.id.minus);
 
-
-        //numerical calculator buttons colors
-
-        celcious.setInputType(InputType.TYPE_NULL);
-        fahranheit.setInputType(InputType.TYPE_NULL);
-        kelvin.setInputType(InputType.TYPE_NULL);
+        clear.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
 
 
         setupTextWatchers();
 
-        //click listeners for keyboard buttons
-        setupNumericButtons(view, R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine, R.id.zero, R.id.comma );
 
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleMinus();
-            }
-        });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleBackspace();
-            }
-        });
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,20 +59,6 @@ public class temperatureFragment extends Fragment {
         return view;
     }
 
-
-    private void setupNumericButtons(View view, int... buttonIds) {
-        for (int buttonId : buttonIds) {
-            Button button = view.findViewById(buttonId);
-            setButtonBackgroundColor(view, buttonId);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onNumericKeyPressed(v);
-                }
-            });
-        }
-    }
 
 
     private void setupTextWatchers() {
@@ -160,11 +125,7 @@ public class temperatureFragment extends Fragment {
 
     }
 
-    private void setButtonBackgroundColor(View parentView, int buttonId) {
-        Button button = parentView.findViewById(buttonId);
-        button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey));
 
-    }
 
     private void clearAllEditTexts() {
 
@@ -177,72 +138,10 @@ public class temperatureFragment extends Fragment {
 
     }
 
-    public void handleMinus(){
 
-
-            View focusedView = requireActivity().getCurrentFocus();
-            if (focusedView instanceof EditText) {
-                EditText focusedEditText = (EditText) focusedView;
-                focusedEditText.append("-");
-            }
-
-
-
-
-}
-    private void handleBackspace() {
-        View focusedView = requireActivity().getCurrentFocus();
-
-        if (focusedView instanceof EditText) {
-            EditText editText = (EditText) focusedView;
-            Editable editable = editText.getText();
-            int length = editable.length();
-
-            if (length > 1) {
-                editable.delete(length - 1, length);
-            } else {
-                clearAllEditTexts();
-            }
-
-        }
-
-
-    }
 
     //calculation logic
 
-    public void onNumericKeyPressed(View view) {
-        if (view instanceof Button) {
-            Button button = (Button) view;
-            String key = button.getText().toString();
-
-
-            if (view.getId() == R.id.celious) {
-                celcious.requestFocus();
-            } else if (view.getId() == R.id.fahrenheit) {
-                fahranheit.requestFocus();
-            }
-
-            //set the numeric key to the focused EditText
-            View focusedView = requireActivity().getCurrentFocus();
-            if (focusedView instanceof EditText) {
-                EditText focusedEditText = (EditText) focusedView;
-
-                if (focusedEditText.getText().toString().equals("0.0") || focusedEditText.getText().toString().equals("0")   || focusedEditText.getText().toString().equals("0.00")) {
-                    focusedEditText.setText(key);
-                } else {
-                    if (focusedEditText.getText().toString().length() < 15) {
-
-                        focusedEditText.append(key);
-                    }else{
-                        Toast.makeText(getContext(), "Maximum character limit reached", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-
-            }
-        }
-    }
 
 
 
