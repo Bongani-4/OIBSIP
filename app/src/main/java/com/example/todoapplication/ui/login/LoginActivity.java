@@ -30,6 +30,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.todoapplication.MainActivity;
 import com.example.todoapplication.R;
+import com.example.todoapplication.RegisterActivity;
 import com.example.todoapplication.ui.login.LoginViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private EditText edusername, edpassword;
     private Button btn;
-    private TextView tv, forgotpasswordTV;
     private ProgressBar loadingProgressBar;
     private static SharedPreferences sharedPreferences;
 
@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
         edusername = findViewById(R.id.Email);
         edpassword = findViewById(R.id.password);
         btn = findViewById(R.id.login);
-       tv = findViewById(R.id.forgotpassword);
-       forgotpasswordTV = findViewById(R.id.register);
+        TextView registerTV = findViewById(R.id.register);
+        TextView forgotpasswordTV = findViewById(R.id.forgotpassword);
         loadingProgressBar = findViewById(R.id.loading);
 
         btn.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.black));
@@ -126,10 +126,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        tv.setOnClickListener(new View.OnClickListener() {
+        registerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(LoginActivity.this, MainActivity.class));
+               startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
