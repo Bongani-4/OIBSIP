@@ -1,136 +1,241 @@
+
 package com.example.todoapplication.ui.login;
 
-import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.todoapplication.MainActivity;
 import com.example.todoapplication.R;
 import com.example.todoapplication.ui.login.LoginViewModel;
-import com.example.todoapplication.ui.login.LoginViewModelFactory;
-import com.example.todoapplication.databinding.ActivityLoginBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-    private ActivityLoginBinding binding;
+    private EditText edusername, edpassword;
+    private Button btn;
+    private TextView tv, forgotpasswordTV;
+    private ProgressBar loadingProgressBar;
+    private static SharedPreferences sharedPreferences;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
+        sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
-        final ProgressBar loadingProgressBar = binding.loading;
+        edusername = findViewById(R.id.Email);
+        edpassword = findViewById(R.id.password);
+        btn = findViewById(R.id.login);
+       tv = findViewById(R.id.forgotpassword);
+       forgotpasswordTV = findViewById(R.id.register);
+        loadingProgressBar = findViewById(R.id.loading);
+
+        btn.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.black));
+
+        if (isLoggedIn()) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+            return;
+        }
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isInternetConnected()) {
+                    String username = edusername.getText().toString();
+                    String password = edpassword.getText().toString();
+
+                    if (username.length() == 0 || password.length() == 0) {
+                        Toast.makeText(getApplicationContext(), "All details should be filled!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        loadingProgressBar.setVisibility(View.VISIBLE);
+                        loginViewModel.login(username, password);
+                    }
+                } else {
+                    showNoInternetDialog();
+                }
+            }
+        });
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
+            public void onChanged(@NonNull LoginFormState loginFormState) {
                 if (loginFormState == null) {
                     return;
                 }
-                loginButton.setEnabled(loginFormState.isDataValid());
+                btn.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
+                    edusername.setError(getString(loginFormState.getUsernameError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
+                    edpassword.setError(getString(loginFormState.getPasswordError()));
                 }
             }
         });
 
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
+            public void onChanged(@NonNull LoginResult loginResult) {
+                loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
             }
         });
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+               startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
+
+        forgotpasswordTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showForgotPasswordDialog();
             }
         });
     }
 
+    private void showForgotPasswordDialog() {
+        //logic for resetting the password
+    }
+
+    private void sendPasswordResetEmail(String email) {
+        // Implement the logic for sending a password reset email
+    }
+
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.welcome) + model.getDisplayName(), Toast.LENGTH_LONG).show();
+        saveLoginStatus(getApplicationContext(), true);
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
-}
+
+    private boolean isLoggedIn() {
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            long loginTime = sharedPreferences.getLong("loginTime", 0);
+            long currentTimeMillis = System.currentTimeMillis();
+
+            long sessionDuration = 24 * 60 * 60 * 1000;
+
+            isLoggedIn = (currentTimeMillis - loginTime) < sessionDuration;
+        }
+
+        return isLoggedIn;
+    }
+
+    public static void saveLoginStatus(Context context, boolean isLoggedIn) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", isLoggedIn);
+        if (isLoggedIn) {
+            long currentTimeMillis = System.currentTimeMillis();
+            editor.putLong("loginTime", currentTimeMillis);
+        } else {
+            editor.remove("loginTime");
+        }
+        editor.apply();
+    }
+
+    private boolean isInternetConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+                return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI));
+            } else {
+                NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+                return activeNetwork != null && activeNetwork.isConnected();
+            }
+        }
+
+        return false;
+    }
+
+    private void showNoInternetDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("No Internet Connection");
+        builder.setMessage("To use the app, turn on mobile data or connect to Wi-Fi.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+   public void togglePasswordVisibility(View view) {
+        ImageButton passwordToggle = findViewById(R.id.passwordVisibilityToggle);
+        EditText passwordEditText = findViewById(R.id.password);
+
+        int currentVisibility = passwordEditText.getInputType();
+        int newVisibility;
+
+        if (currentVisibility == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            newVisibility = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+            passwordToggle.setImageResource(R.drawable.icovisibilityon);
+        } else {
+            newVisibility = InputType.TYPE_TEXT_VARIATION_PASSWORD;
+            passwordToggle.setImageResource(R.drawable.icoisibility);
+        }
+
+        passwordEditText.setInputType(newVisibility);
+        passwordEditText.setSelection(passwordEditText.length());
+    }
+
+    }
+
