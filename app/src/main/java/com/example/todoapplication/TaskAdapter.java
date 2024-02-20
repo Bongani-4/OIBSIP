@@ -35,8 +35,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.textTaskName.setText(task.getTaskName());
         holder.textTime.setText(task.getTime());
 
-        holder.checkImportant.setChecked(task.isImportant());
-        holder.checkWork.setChecked(task.isWork());
+
     }
 
     @Override
@@ -47,16 +46,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
 
         TextView textTaskName;
-        TextView textTime;
-        CheckBox checkImportant;
+        TextView textTime,checkImportant;
+
         CheckBox checkWork;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             textTaskName = itemView.findViewById(R.id.textTaskName);
             textTime = itemView.findViewById(R.id.textTime);
-            checkImportant = itemView.findViewById(R.id.checkImportant);
-            checkWork = itemView.findViewById(R.id.checkWork);
+            checkImportant = itemView.findViewById(R.id.urgency);
+
         }
     }
 }
