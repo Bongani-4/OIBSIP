@@ -1,66 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <EditText
-        android:id="@+id/editTaskName"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Task Name" />
+        android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/secondRow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTaskName"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/editTaskName"
+            android:layout_width="match_parent"
+            android:layout_marginTop="50dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:hint="Enter Task Name here" />
 
-        <TimePicker
-            android:id="@+id/timePicker"
+        <LinearLayout
+            android:id="@+id/secondRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTaskName"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:timePickerMode="spinner"/>
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroupOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/secondRow"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Work" />
+
+            <RadioButton
+                android:id="@+id/radioPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Personal"
+                android:textStyle="bold"/>
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/urgent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp" />
+            android:layout_below="@id/radioGroupOptions"
+            android:layout_marginTop="5dp"
+            android:gravity="bottom|start"
+            android:text="Urgent"
+            android:textStyle="bold"/>
 
-    </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
 
-    <RadioGroup
-        android:id="@+id/radioGroupOptions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/secondRow"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioWork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Work" />
-
-        <RadioButton
-            android:id="@+id/radioPersonal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Personal" />
-    </RadioGroup>
-
-    <CheckBox
-        android:id="@+id/urgent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/radioGroupOptions"
-        android:layout_marginTop="5dp"
-        android:gravity="bottom|start"
-        android:text="Urgent" />
-
-</RelativeLayout>
