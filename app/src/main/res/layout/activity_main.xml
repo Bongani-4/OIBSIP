@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/containers"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -37,6 +39,29 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/pencil" />
+        app:srcCompat="@drawable/pencil"
+        android:contentDescription="TODO" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/imageButtonlogoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="314dp"
+        android:layout_marginBottom="110dp"
+        android:background="@color/white"
+        android:onClick="logoutUser"
+        android:src="@drawable/icologout"
+        android:contentDescription="logoff" />
+
+    <ListView
+        android:id="@+id/listViewitasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"/>
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

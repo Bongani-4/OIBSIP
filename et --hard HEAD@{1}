@@ -1,0 +1,27 @@
+[33m50c513b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit: login setup v2
+[33m4d522f7[m HEAD@{1}: commit: login setup
+[33m4b9e5bc[m HEAD@{2}: pull origin main: Merge made by the 'ort' strategy.
+[33m9161c6e[m HEAD@{3}: commit: Todo app login setup
+[33m9f831fe[m HEAD@{4}: commit: Todo app start ups
+[33m65fad15[m HEAD@{5}: commit: Move files to the new folder for UnitConverterApp
+[33mac1e7b3[m HEAD@{6}: commit: Organize project files into separate directories
+[33mb6748c1[m HEAD@{7}: pull origin main: Merge made by the 'ort' strategy.
+[33m7c871b2[m HEAD@{8}: commit: feature update v3
+[33m934541a[m HEAD@{9}: commit: feature update v2
+[33md101219[m HEAD@{10}: commit: feature update
+[33m6276016[m HEAD@{11}: commit: ReadMe update
+[33m4ef9a59[m HEAD@{12}: commit: FINAL B-UNIT COVERTER update
+[33m8132900[m HEAD@{13}: commit: time,temperature& volume update
+[33mb737946[m HEAD@{14}: commit: data convertion v3
+[33mc6c83f8[m HEAD@{15}: commit: data v1
+[33me7a8e00[m HEAD@{16}: commit: length completed
+[33me4e7760[m HEAD@{17}: commit: length final version
+[33m9dde427[m HEAD@{18}: commit: length v3
+[33medd51f2[m HEAD@{19}: commit: length v2
+[33m3993c67[m HEAD@{20}: commit: length v1
+[33m2fe5e98[m HEAD@{21}: commit: layout fragments
+[33mc163334[m HEAD@{22}: pull origin main --allow-unrelated-histories: Merge made by the 'ort' strategy.
+[33m84c9dd4[m HEAD@{23}: commit: layout homepage
+[33m6b918c9[m HEAD@{24}: commit: layout homepage
+[33m99a6c53[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{25}: checkout: moving from master to main
+[33m99a6c53[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{26}: commit (initial): new branch

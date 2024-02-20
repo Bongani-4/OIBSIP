@@ -11,7 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/white"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".RegisterActivity">
 
     <View
         android:id="@+id/view"
@@ -112,13 +112,13 @@
         app:layout_constraintTop_toBottomOf="@+id/Emailregister" />
 
     <ImageButton
-        android:id="@+id/passwordVisibilityToggle"
+        android:id="@+id/passwordVisibilityToggleR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@color/white"
-        android:onClick="togglePasswordVisibility"
+        android:onClick="togglePasswordVisibilitys"
         app:layout_constraintEnd_toEndOf="@+id/confirmpassword"
         app:layout_constraintTop_toBottomOf="@+id/Emailregister"
         app:srcCompat="@drawable/icovisibilityon" />
@@ -130,7 +130,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:background="@color/white"
-        android:onClick="togglePasswordVisibility"
+        android:onClick="togglePasswordVisibilitysi"
         app:layout_constraintEnd_toEndOf="@+id/confirmpassword"
         app:layout_constraintTop_toBottomOf="@+id/regpassword"
         app:srcCompat="@drawable/icovisibilityon" />
@@ -143,7 +143,6 @@
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="224dp"
-        android:enabled="false"
         android:text="@string/register"
         android:textColor="#0AAFEC"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -152,6 +151,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.851" />
+
+
 
 
     <TextView
