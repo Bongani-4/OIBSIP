@@ -10,10 +10,19 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lets schedule an event"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
         <EditText
             android:id="@+id/editTaskName"
             android:layout_width="match_parent"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_height="wrap_content"
             android:hint="Enter Task Name here" />
 
@@ -25,10 +34,22 @@
             android:layout_marginTop="15dp"
             android:orientation="vertical">
 
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginTop="5dp"
+    android:text="select Date and time: "
+    android:textStyle="italic"
+    android:textColor="@color/black"/>
+
             <DatePicker
                 android:id="@+id/datePicker"
+                android:layout_marginTop="9dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:datePickerMode="calendar"
                 android:layout_weight="1" />
 
             <TimePicker
@@ -38,14 +59,18 @@
                 android:layout_marginStart="10dp"
                 android:timePickerMode="spinner"/>
 
+
+
+
         </LinearLayout>
 
         <RadioGroup
             android:id="@+id/radioGroupOptions"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             android:layout_below="@id/secondRow"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
             <RadioButton
