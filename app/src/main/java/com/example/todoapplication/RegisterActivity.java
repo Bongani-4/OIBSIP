@@ -1,5 +1,7 @@
 package com.example.todoapplication;
 
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -15,12 +17,14 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import  com.google.firebase.firestore.FirebaseFirestore;
 import com.example.todoapplication.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,20 +32,20 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private TextView tv;
-    private EditText names;
-    private EditText email;
-    private EditText password;
-    private EditText passwordconfirm;
+    private EditText names, email, password, passwordconfirm;
+
     private Button regbtn;
-    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference usersRef;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        db = FirebaseFirestore.getInstance();
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("users");
 
         regbtn = findViewById(R.id.Rgisterbtn);
         tv = findViewById(R.id.haveaccount);
@@ -50,7 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.regpassword);
         passwordconfirm = findViewById(R.id.confirmpassword);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
         tv.setOnClickListener(new View.OnClickListener() {
@@ -84,34 +87,34 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Map<String, Object> user = new HashMap<>();
-                                    user.put("name", userName);
-                                    user.put("email", userEmail);
-                                    user.put("password", userPassword);
+                                    // Save user data to Realtime Database
+                                    saveUserDataToDatabase(userName, userEmail, userPassword);
 
-                                    db.collection("users")
-                                            .document(userEmail)
-                                            .set(user)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Toast.makeText(getApplicationContext(), "Registration success", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                                    } else {
-                                                        Toast.makeText(getApplicationContext(), "Registration failed", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
+                                    Toast.makeText(getApplicationContext(), "Registration success", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Firebase Authentication failed", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-            }
-        });
+                }
 
+            });
+        }
+    private void saveUserDataToDatabase(String userName, String userEmail, String userPassword) {
+        //  a unique user id using the user's email
+        String userId = userEmail.replace(".", "_");
+
+        //  a map to store user data
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", userName);
+        user.put("email", userEmail);
+        user.put("password", userPassword);
+
+        // Save the user data to Realtime Database
+        usersRef.child(userId).setValue(user);
     }
+
         public void togglePasswordVisibilitys(View view) {
         ImageButton passwordToggle = findViewById(R.id.passwordVisibilityToggleR);
         EditText passwordEditText = findViewById(R.id.regpassword);

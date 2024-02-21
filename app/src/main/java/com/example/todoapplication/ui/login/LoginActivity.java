@@ -1,4 +1,3 @@
-
 package com.example.todoapplication.ui.login;
 
 import android.app.AlertDialog;
@@ -39,13 +38,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class LoginActivity extends AppCompatActivity {
+
 
     private LoginViewModel loginViewModel;
     private EditText edusername, edpassword;
     private Button btn;
     private ProgressBar loadingProgressBar;
     private static SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
