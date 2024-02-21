@@ -70,6 +70,7 @@ public class Addtasks extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 saveTaskToFirebase();
                 if(setalert.isChecked())
                 {
