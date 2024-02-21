@@ -70,7 +70,7 @@
 
             android:layout_height="wrap_content"
             android:layout_below="@id/secondRow"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -96,6 +96,17 @@
             android:layout_marginTop="5dp"
             android:gravity="bottom|start"
             android:text="Urgent"
+            android:textColor="#D50D0D"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/Set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/urgent"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:text="Schedule"
             android:textStyle="bold"/>
 
     </RelativeLayout>
