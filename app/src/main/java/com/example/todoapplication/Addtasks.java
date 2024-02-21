@@ -15,8 +15,8 @@ Button btnschedule,btncancel ;
         btnschedule = findViewById(R.id.Set);
         btncancel = findViewById(R.id.cancel);
 
-        btnschedule.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.black));
-        btncancel.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.black));
+        btnschedule.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.grey));
+        btncancel.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.grey));
 
 
 

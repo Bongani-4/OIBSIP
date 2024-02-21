@@ -48,16 +48,19 @@
             <DatePicker
                 android:id="@+id/datePicker"
                 android:layout_marginTop="9dp"
+                android:calendarTextColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:datePickerMode="calendar"
-                android:textColor="@color/black"
+                
                 android:layout_weight="1" />
 
             <TimePicker
                 android:id="@+id/timePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:numbersTextColor="@color/black"
+                android:numbersSelectorColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:timePickerMode="spinner"/>
@@ -112,6 +115,7 @@
             android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:text="Save"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="200dp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -125,6 +129,7 @@
             android:textAlignment="center"
 
             android:text="Cancel"
+     android:layout_marginStart="8dp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
 
