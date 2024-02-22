@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
         sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
 
