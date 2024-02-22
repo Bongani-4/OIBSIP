@@ -17,6 +17,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     private List<Task> taskList;
 
+
+
     public TaskAdapter(List<Task> taskList) {
         this.taskList = taskList;
     }
@@ -26,6 +28,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
         return new TaskViewHolder(view);
+
     }
 
     @Override
@@ -38,6 +41,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return taskList.size();
@@ -45,16 +50,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textTaskName;
-        TextView textTime,checkImportant;
 
-        CheckBox checkWork;
+        TextView textTime,checkImportant,textTaskName,Date;
+
+
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             textTaskName = itemView.findViewById(R.id.textTaskName);
             textTime = itemView.findViewById(R.id.textTime);
             checkImportant = itemView.findViewById(R.id.urgency);
+            Date = itemView.findViewById(R.id.textDate);
+
 
         }
     }

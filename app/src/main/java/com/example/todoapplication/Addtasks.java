@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,12 +46,15 @@ public class Addtasks extends AppCompatActivity {
 
     private DatabaseReference tasksRef;
     private static final String ALERT_BROADCAST = "com.example.todoapplication.ALERT_BROADCAST";
+    private  AlarmManager alarmmanager;
+    private PendingIntent pendingintent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        createnotification();
 
         // Initialize Firebase Database reference
         tasksRef = FirebaseDatabase.getInstance().getReference("tasks");
@@ -74,7 +80,9 @@ public class Addtasks extends AppCompatActivity {
                 saveTaskToFirebase();
                 if(setalert.isChecked())
                 {
+
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
                         setAlert();
                     }
                 }
@@ -134,6 +142,14 @@ public class Addtasks extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void setAlert() {
 
+
+
+        alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        // an intent for the alarm broadcast
+        Intent intent = new Intent(this,AlertReceiver.class);
+        pendingintent = PendingIntent.getBroadcast(this,0,intent, PendingIntent.FLAG_IMMUTABLE);
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED) {
 
             return;
@@ -149,18 +165,12 @@ public class Addtasks extends AppCompatActivity {
         // Calculating the time 10 minutes before the selected time
         long alertTime = calculateAlertTime(year, month, day, hour, minute);
 
-        // an intent for the alert broadcast
-        Intent alertIntent = new Intent(ALERT_BROADCAST);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alertIntent, PendingIntent.FLAG_IMMUTABLE);
+        alarmmanager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alertTime,AlarmManager.INTERVAL_DAY,pendingintent);
+    Toast.makeText(this, "Alert set successfully",Toast.LENGTH_SHORT).show();
 
-        // Setting the alarm
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        if (alarmManager != null) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime, pendingIntent);
-        }
 
-        // Registering the broadcast receiver to handle the alert
-        registerReceiver(new AlertReceiver(), new IntentFilter(ALERT_BROADCAST), null, null, Context.RECEIVER_NOT_EXPORTED);
+
+
     }
 
     private long calculateAlertTime(int year, int month, int day, int hour, int minute) {
@@ -173,6 +183,39 @@ public class Addtasks extends AppCompatActivity {
 
         return alertTime;
     }
+
+    private  void createnotification()
+    {
+        NotificationChannel channel = new NotificationChannel(
+                "ToDo",
+                "ToDoChannel",
+                NotificationManager.IMPORTANCE_HIGH
+        );
+        channel.setDescription("Channel for ToDo alert");
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+
+
+    }
+    public void cancelalert()
+    {
+
+        Intent intent =  new Intent(this,AlertReceiver.class);
+
+        pendingintent = PendingIntent.getBroadcast(this,0,intent, PendingIntent.FLAG_IMMUTABLE);
+
+        if(alarmmanager==null){
+          alarmmanager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        }
+
+
+
+
+
+    }
+
 
 
 

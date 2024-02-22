@@ -39,6 +39,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import com.google.firebase.database.ValueEventListener;
+
+
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn;
     private ProgressBar loadingProgressBar;
     private static SharedPreferences sharedPreferences;
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -80,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (isInternetConnected()) {
                     String username = edusername.getText().toString();
                     String password = edpassword.getText().toString();
@@ -87,14 +93,29 @@ public class LoginActivity extends AppCompatActivity {
                     if (username.length() == 0 || password.length() == 0) {
                         Toast.makeText(getApplicationContext(), "All details should be filled!", Toast.LENGTH_SHORT).show();
                     } else {
-                        loadingProgressBar.setVisibility(View.VISIBLE);
-                        loginViewModel.login(username, password);
+                        // Authenticate user with Firebase
+                        firebaseAuth.signInWithEmailAndPassword(username, password)
+                                .addOnCompleteListener(LoginActivity.this, task -> {
+                                    if (task.isSuccessful()) {
+                                        // Fetch user details from Realtime DB
+                                        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+                                        if (currentUser != null) {
+                                            getUserDetails(currentUser);
+
+                                        }
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
-                } else {
+                }else {
                     showNoInternetDialog();
+
                 }
             }
         });
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -152,12 +173,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        Toast.makeText(getApplicationContext(), getString(R.string.welcome) + model.getDisplayName(), Toast.LENGTH_LONG).show();
+        String displayName = model.getDisplayName();
+        Toast.makeText(getApplicationContext(), "Welcome " + displayName, Toast.LENGTH_LONG).show();
         saveLoginStatus(getApplicationContext(), true);
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }
-
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
@@ -175,6 +196,36 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return isLoggedIn;
+    }
+
+
+    private void getUserDetails(FirebaseUser currentUser) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    String email = userSnapshot.child("email").getValue(String.class);
+                    String name = userSnapshot.child("name").getValue(String.class);
+
+
+                    if (email.equals(currentUser.getEmail()) || name.equals(currentUser.getDisplayName())) {
+                        Toast.makeText(getApplicationContext(), "Welcome, " + name, Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                        return;
+                    }
+                }
+
+
+                Toast.makeText(getApplicationContext(), "User not found in the database.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Error fetching user details.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public static void saveLoginStatus(Context context, boolean isLoggedIn) {

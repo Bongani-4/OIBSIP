@@ -1,11 +1,17 @@
 package  com.example.todoapplication;
 
+import java.io.Serializable;
+
 // Task.java
-public class Task {
+public class Task  implements Serializable {
     private String taskName;
     private String time;
     private boolean isImportant;
     private boolean isWork;
+
+
+    public Task()
+    {}
 
     public Task(String taskName, String time, boolean isImportant, boolean isWork) {
         this.taskName = taskName;
