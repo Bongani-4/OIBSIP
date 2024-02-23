@@ -47,10 +47,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -72,8 +74,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         // Initialize RecyclerView and layout manager
         binding.recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
@@ -83,14 +89,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Initialize taskList and taskAdapter
+
         taskList = new ArrayList<>();
         taskAdapter = new TaskAdapter(taskList);
 
         // Set the adapter to the RecyclerView
         binding.recyclerViewTasks.setAdapter(taskAdapter);
 
-
+        // Fetch tasks from Firebase
         fetchTasksFromFirebase();
+
+        // Remove old tasks after fetching
+      //  taskAdapter.removeTask();
+
 
 
         setSupportActionBar(binding.toolbar);
@@ -114,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
     private void fetchTasksFromFirebase() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         tasksRef = FirebaseDatabase.getInstance().getReference("tasks");
@@ -134,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         // Sort tasks by date
-                        Collections.sort(fetchedTasks, new Comparator<Task>() {
+                        Collections.sort(fetchedTasks, new Comparator< Task>() {
                             @Override
                             public int compare(Task task1, Task task2) {
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
@@ -152,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                         // Update the RecyclerView with the sorted tasks
                         if (!fetchedTasks.isEmpty()) {
                             displayTasks(fetchedTasks);
+
+                            taskAdapter.removeTask();
                         } else {
                             Toast.makeText(MainActivity.this, "Fetched tasks are empty", Toast.LENGTH_SHORT).show();
                         }

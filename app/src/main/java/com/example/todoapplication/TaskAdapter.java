@@ -2,15 +2,27 @@ package com.example.todoapplication;
 
 // TaskAdapter.java
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.text.SimpleDateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
-
+import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Random;
 import java.util.List;
+import android.content.Context;
+import android.view.View;
+import android.content.res.Resources;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
@@ -48,10 +60,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
+
 
 
         holder.textTaskName.setTextColor(Color.BLACK);
@@ -66,17 +78,51 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 
 
-        // Set random background color
-        int color = getRandomColor();
+
+
+
+
+        // Set background color
+        int color;
+        if (task.isUrgent()) {
+            color = Color.parseColor("#800000");
+
+        } else {
+            color = getRandomColor();
+        }
         holder.itemView.setBackgroundColor(color);
     }
+
+    private boolean isTaskInPast(Task task) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        try {
+            Date taskDate = dateFormat.parse(task.getDateTime());
+            if (taskDate != null) {
+                // Get the current date and time
+                Calendar currentDateTime = Calendar.getInstance();
+                // Compare the task's date and time with the current date and time
+                return taskDate.before(currentDateTime.getTime());
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private int getRandomColor() {
+        // Define  set of colors
+        int[] predefinedColors = {Color.rgb(96, 104, 115),   // Pewter
+                Color.rgb(70, 89, 101),    // Steel
+                Color.rgb(65, 67, 77),     // Iron
+                Color.rgb(53, 56, 60)};    // Seal
+
         Random random = new Random();
         int color;
 
         // Generate random colors until a different color is obtained
         do {
-            color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            color = predefinedColors[random.nextInt(predefinedColors.length)];
         } while (color == lastColor);
 
         // Update lastColor for the next iteration
@@ -89,10 +135,28 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 
 
+
+
+
+
+
     @Override
     public int getItemCount() {
+
         return taskList.size();
     }
+    public void removeTask() {
+        Iterator<Task> iterator = taskList.iterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
+            if (isTaskInPast(task)) {
+                iterator.remove();
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }
+
 
 
