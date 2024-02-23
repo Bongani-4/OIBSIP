@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.todoapplication.TaskAdapter;
 import com.example.todoapplication.Task;
@@ -49,7 +52,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView    recyclerView;
+
     private TaskAdapter taskAdapter;
     private List<Task> taskList;
     private View mainContainer;
@@ -62,23 +65,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        fetchTasksFromFirebase();
-
-
-
-        recyclerView = findViewById(R.id.recyclerViewTasks);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        taskList = new ArrayList<>();
-        taskAdapter = new TaskAdapter(taskList);
-        recyclerView.setAdapter(taskAdapter);
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Initialize RecyclerView and layout manager
+        binding.recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerViewTasks.getContext(), DividerItemDecoration.VERTICAL);
+        binding.recyclerViewTasks.addItemDecoration(dividerItemDecoration);
+
+
+        // Initialize taskList and taskAdapter
+        taskList = new ArrayList<>();
+        taskAdapter = new TaskAdapter(taskList);
+
+        // Set the adapter to the RecyclerView
+        binding.recyclerViewTasks.setAdapter(taskAdapter);
+
+
+        fetchTasksFromFirebase();
+
 
         setSupportActionBar(binding.toolbar);
 
@@ -89,10 +96,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
-    private void addTask(String taskName, String time, boolean isImportant, boolean isWork) {
+    private void addTask(String taskName, String time, boolean isImportant, String isWork) {
         Task task = new Task(taskName, time, isImportant, isWork);
         taskList.add(task);
         taskAdapter.notifyDataSetChanged();
@@ -102,9 +111,6 @@ public class MainActivity extends AppCompatActivity {
     private void fetchTasksFromFirebase() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         tasksRef = FirebaseDatabase.getInstance().getReference("tasks");
-        assert user != null;
-        Toast.makeText(MainActivity.this, "Authenticated User: " + user.getUid() + " - " + user.getEmail(), Toast.LENGTH_SHORT).show();
-
 
         if (user != null) {
             tasksRef.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,18 +118,26 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<Task> fetchedTasks = new ArrayList<>();
 
-                    for (DataSnapshot taskSnapshot : dataSnapshot.getChildren()) {
-                        // Additional loop for nested task IDs
-                        for (DataSnapshot nestedTaskSnapshot : taskSnapshot.getChildren()) {
-                            Task task = nestedTaskSnapshot.getValue(Task.class);
+                    // Check if the user has tasks
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot taskSnapshot : dataSnapshot.getChildren()) {
+                            Task task = taskSnapshot.getValue(Task.class);
                             if (task != null) {
                                 fetchedTasks.add(task);
+                                Log.d("FetchTasks", "Task: " + task.getTaskName() + ", Time: " + task.getDateTime());
+
                             }
                         }
-                    }
 
-                    // Update the RecyclerView with the fetched tasks
-                    displayTasks(fetchedTasks);
+                        // Update the RecyclerView with the fetched tasks
+                        if (!fetchedTasks.isEmpty()) {
+                            displayTasks(fetchedTasks);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Fetched tasks are empty", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(MainActivity.this, "User has no tasks", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
@@ -131,14 +145,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Failed to fetch tasks.", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
-        else {
-
-            Toast.makeText(MainActivity.this, "User not found ,log out and log in again", Toast.LENGTH_SHORT).show();
-
-
+        } else {
+            Toast.makeText(MainActivity.this, "User not found, log out and log in again", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void displayTasks(List<Task> tasks) {
         // Update the taskList with the new tasks
         taskList.clear();
@@ -151,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
         //taskAdapter.notifyDataSetChanged();
 
-        recyclerView.scrollToPosition(0);
+        binding.recyclerViewTasks.scrollToPosition(0);
     }
 
 

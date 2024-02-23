@@ -104,6 +104,10 @@ public class LoginActivity extends AppCompatActivity {
                                             getUserDetails(currentUser);
 
                                         }
+                                        else{
+
+                                            Toast.makeText(getApplicationContext(), "User null.", Toast.LENGTH_SHORT).show();
+                                        }
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                                     }

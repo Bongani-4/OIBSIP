@@ -5,19 +5,19 @@ import java.io.Serializable;
 // Task.java
 public class Task  implements Serializable {
     private String taskName;
-    private String time;
-    private boolean isImportant;
-    private boolean isWork;
+    private String dateTime;
+    private boolean urgent;
+    private String taskType;
 
 
     public Task()
     {}
 
-    public Task(String taskName, String time, boolean isImportant, boolean isWork) {
+    public Task(String taskName, String dateTime, boolean urgent, String taskType) {
         this.taskName = taskName;
-        this.time = time;
-        this.isImportant = isImportant;
-        this.isWork = isWork;
+        this.dateTime = dateTime;
+        this.urgent = urgent;
+        this.taskType = taskType;
     }
 
     // Getter methods
@@ -25,15 +25,15 @@ public class Task  implements Serializable {
         return taskName;
     }
 
-    public String getTime() {
-        return time;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public boolean isImportant() {
-        return isImportant;
+    public boolean isUrgent() {
+        return urgent;
     }
 
-    public boolean isWork() {
-        return isWork;
+    public String isTaskType() {
+        return taskType;
     }
 }

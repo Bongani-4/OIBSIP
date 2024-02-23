@@ -24,14 +24,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="visible"
             android:text="Date" />
 
         <TextView
-            android:id="@+id/textTime"
+            android:id="@+id/tasktype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Time" />
+            android:text="Tasktype" />
 
     </LinearLayout>
 
