@@ -53,10 +53,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
 
+
+        holder.textTaskName.setTextColor(Color.BLACK);
+        holder.Date.setTextColor(Color.BLACK);
+        holder.checkImportant.setTextColor(Color.BLACK);
+        holder.tasktype.setTextColor(Color.BLACK);
+
         holder.textTaskName.setText(task.getTaskName());
         holder.Date.setText(task.getDateTime());
-        holder.checkImportant.setText(String.valueOf(task.isUrgent()));
+        holder.checkImportant.setText(task.isUrgent() ? "Urgent" : "Not Urgent");
         holder.tasktype.setText(task.isTaskType());
+
 
 
         // Set random background color

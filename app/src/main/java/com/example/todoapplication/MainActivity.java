@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,9 +45,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -124,12 +130,26 @@ public class MainActivity extends AppCompatActivity {
                             Task task = taskSnapshot.getValue(Task.class);
                             if (task != null) {
                                 fetchedTasks.add(task);
-                                Log.d("FetchTasks", "Task: " + task.getTaskName() + ", Time: " + task.getDateTime());
-
                             }
                         }
 
-                        // Update the RecyclerView with the fetched tasks
+                        // Sort tasks by date
+                        Collections.sort(fetchedTasks, new Comparator<Task>() {
+                            @Override
+                            public int compare(Task task1, Task task2) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+                                try {
+                                    Date date1 = sdf.parse(task1.getDateTime());
+                                    Date date2 = sdf.parse(task2.getDateTime());
+                                    return date1.compareTo(date2);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                    return 0;
+                                }
+                            }
+                        });
+
+                        // Update the RecyclerView with the sorted tasks
                         if (!fetchedTasks.isEmpty()) {
                             displayTasks(fetchedTasks);
                         } else {
@@ -149,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "User not found, log out and log in again", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void displayTasks(List<Task> tasks) {
         // Update the taskList with the new tasks
