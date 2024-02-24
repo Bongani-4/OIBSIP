@@ -3,10 +3,12 @@ package com.example.todoapplication;
 import static com.example.todoapplication.ui.login.LoginActivity.saveLoginStatus;
 import android.Manifest;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
@@ -99,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
         // Fetch tasks from Firebase
         fetchTasksFromFirebase();
 
-        // Remove old tasks after fetching
-      //  taskAdapter.removeTask();
-
 
 
         setSupportActionBar(binding.toolbar);
@@ -112,17 +111,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Addtasks.class));
             }
         });
+        binding.textViewAddNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startActivity(new Intent(MainActivity.this,addNOtes.class));
+            }
+        });
+        binding.textViewViewNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ViewNotes.class));
+
+            }
+        });
+
 
 
 
     }
-
-
-    private void addTask(String taskName, String time, boolean isImportant, String isWork) {
-        Task task = new Task(taskName, time, isImportant, isWork);
-        taskList.add(task);
-        taskAdapter.notifyDataSetChanged();
-    }
+  
 
 
 

@@ -56,6 +56,7 @@ public class Addtasks extends AppCompatActivity {
         setContentView(R.layout.activity_add_task);
         createnotification();
 
+
         // Initialize Firebase Database reference
         tasksRef = FirebaseDatabase.getInstance().getReference("tasks");
 
@@ -84,6 +85,7 @@ public class Addtasks extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 
                         setAlert();
+
                     }
                 }
             }

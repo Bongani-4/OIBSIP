@@ -22,15 +22,39 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+    <TextView
+        android:id="@+id/textViewAddNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Notes"
+        android:textSize="15sp"
+        android:layout_marginTop="22dp"
+        android:textColor="#0AAFEC"
+        android:layout_marginStart="190dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toTopOf="@id/addTask"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/textViewAddNotes"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_task" />
+
+
+    <TextView
+        android:id="@+id/textViewViewNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Notes"
+        android:textColor="#0AAFEC"
+        android:textSize="15sp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="295dp"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewNotes" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addTask"
@@ -53,8 +77,4 @@
         android:onClick="logoutUser"
         android:src="@drawable/icologout"
         android:contentDescription="logoff" />
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
