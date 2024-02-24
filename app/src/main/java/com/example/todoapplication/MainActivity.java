@@ -42,6 +42,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -186,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // action on completion,
                 showFireworks();
+                removeTaskFromDatabase(task);
+                //taskAdapter.notifyItemRemoved(position);
             }
         });
 
@@ -195,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
                 taskList.remove(position);
                 taskAdapter.notifyItemRemoved(position);
-                // removeTaskFromDatabase(task);
+                 removeTaskFromDatabase(task);
             }
         });
 
@@ -209,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
     }
-/*
+
     private void removeTaskFromDatabase(Task task) {
         // Check if the user is authenticated
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -240,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
             // User is not authenticated
             Toast.makeText(MainActivity.this, "User not authenticated", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 
 
 
@@ -261,7 +264,9 @@ public class MainActivity extends AppCompatActivity {
                         for (DataSnapshot taskSnapshot : dataSnapshot.getChildren()) {
                             Task task = taskSnapshot.getValue(Task.class);
                             if (task != null) {
+                                task.setTaskId(taskSnapshot.getKey());
                                 fetchedTasks.add(task);
+
                             }
                         }
 

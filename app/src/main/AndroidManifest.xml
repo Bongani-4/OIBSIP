@@ -49,7 +49,7 @@
             android:name=".addedTasks"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="To DO"
             android:theme="@style/Theme.ToDoApplication">
@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".TaskAdapter"
