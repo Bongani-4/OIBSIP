@@ -44,6 +44,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_task" />
 
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        />
+
 
     <TextView
         android:id="@+id/textViewViewNotes"

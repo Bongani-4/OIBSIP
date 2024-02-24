@@ -24,6 +24,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import nl.dionsegijn.konfetti.core.models.Shape;
+import nl.dionsegijn.konfetti.core.models.Size;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.todoapplication.TaskAdapter;
@@ -39,6 +41,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +52,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -58,6 +62,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import nl.dionsegijn.konfetti.core.Party;
+import nl.dionsegijn.konfetti.core.PartyFactory;
+import nl.dionsegijn.konfetti.core.Position;
+import nl.dionsegijn.konfetti.core.emitter.Emitter;
+import nl.dionsegijn.konfetti.core.emitter.EmitterConfig;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -70,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private    Party party;
 
 
 
@@ -97,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the adapter to the RecyclerView
         binding.recyclerViewTasks.setAdapter(taskAdapter);
+        taskAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+            public void onItemClick(int position) {
+
+
+
+            }
+        });
+
+
 
         // Fetch tasks from Firebase
         fetchTasksFromFirebase();
@@ -124,12 +145,103 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        EmitterConfig emitterConfig = new Emitter(5L, TimeUnit.SECONDS).perSecond(50);
+        party =
+                new PartyFactory(emitterConfig)
+                        .angle(270)
+                        .spread(90)
+                        .setSpeedBetween(1f, 5f)
+                        .timeToLive(2000L)
+                        .shapes(new Shape.Rectangle(0.2f))
+                        .sizes(new Size(12, 5f, 0.2f))
+                        .position(0.0, 0.0, 1.0, 0.0)
+                        .build();
+       // binding.konfettiView.setOnClickListener(view -> binding.konfettiView.start(party));
+
+        taskAdapter.setOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+            public void onItemClick(int position) {
+
+
+                Task task = taskList.get(position);
+                showProgressDialog(task, position);
+            }
+        });
+
+
+
 
 
 
 
     }
-  
+
+
+    private void showProgressDialog(final Task task, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Task Progress");
+        builder.setMessage("Progress with this task: " + task.getTaskName());
+
+        builder.setPositiveButton("Complete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // action on completion,
+                showFireworks();
+            }
+        });
+
+        builder.setNegativeButton("Remove Task", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                taskList.remove(position);
+                taskAdapter.notifyItemRemoved(position);
+                // removeTaskFromDatabase(task);
+            }
+        });
+
+        builder.show();
+    }
+
+
+    private void showFireworks() {
+        binding.konfettiView.start(party);
+
+
+        Toast.makeText(this, "Well done!", Toast.LENGTH_SHORT).show();
+    }
+/*
+    private void removeTaskFromDatabase(Task task) {
+        // Check if the user is authenticated
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Get the unique task identifier (taskId)
+            String taskId = task.getTaskId();
+
+            // Get a reference to the user's tasks in the database
+            DatabaseReference userTasksRef = tasksRef.child(user.getUid());
+
+            // Remove the task from the database
+            userTasksRef.child(taskId).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Task removed successfully
+                            Toast.makeText(MainActivity.this, "Task removed successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Error occurred while removing the task
+                            Toast.makeText(MainActivity.this, "Failed to remove task", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            // User is not authenticated
+            Toast.makeText(MainActivity.this, "User not authenticated", Toast.LENGTH_SHORT).show();
+        }
+    }*/
+
 
 
 

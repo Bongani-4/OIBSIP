@@ -38,6 +38,7 @@ android {
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation ("nl.dionsegijn:konfetti-xml:2.0.4")
 
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
 

@@ -28,7 +28,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     private List<Task> taskList;
     private int lastColor = -1;
+    private OnItemClickListener listener;
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+
+    }
+
+    public void  setOnItemClickListener(OnItemClickListener clickListener) {
+         listener = clickListener;
+    }
 
     public  TaskAdapter(List<Task> taskList) {
         this.taskList = taskList;
@@ -38,32 +47,47 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
-        return new TaskViewHolder(view);
+        return new TaskViewHolder(view,listener);
+
+
 
     }
-    public static class TaskViewHolder extends RecyclerView.ViewHolder {
+    public static class TaskViewHolder extends RecyclerView.ViewHolder  {
+
 
 
         TextView tasktype,checkImportant,textTaskName,Date;
 
 
 
-        public TaskViewHolder(@NonNull View itemView) {
+        public TaskViewHolder(@NonNull View itemView,OnItemClickListener listener) {
             super(itemView);
             textTaskName = itemView.findViewById(R.id.textTaskName);
             tasktype = itemView.findViewById(R.id.tasktype);
             checkImportant = itemView.findViewById(R.id.urgency);
             Date = itemView.findViewById(R.id.textDate);
 
+          //  itemView.setOnClickListener(this);
+
+
 
         }
+
+
     }
+
+    public interface OnTaskClickListener {
+        void onTaskClick(int position);
+    }
+
+
+
+
 
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
-
 
 
         holder.textTaskName.setTextColor(Color.BLACK);
@@ -77,11 +101,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.tasktype.setText(task.isTaskType());
 
 
-
-
-
-
-
         // Set background color
         int color;
         if (task.isUrgent()) {
@@ -91,6 +110,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             color = getRandomColor();
         }
         holder.itemView.setBackgroundColor(color);
+
+
+        // Set click listener
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onItemClick(holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     private boolean isTaskInPast(Task task) {
