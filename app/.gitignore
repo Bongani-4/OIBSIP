@@ -1,5 +1,4 @@
 android-app-farmguardian-firebase-adminsdk-mb7j0-504fe02152.json
-google-services.json
-*.json
 /build
-
+*.json
+!/build/google-services.json
