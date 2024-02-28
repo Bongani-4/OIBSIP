@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-             rrr               @Override
+                         @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Save user data to Realtime Database
