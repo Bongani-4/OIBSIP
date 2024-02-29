@@ -14,7 +14,20 @@ A simple Android stopwatch application with additional features.
   #### Prerequisites 
   * Android Studio
   * Android device or emulator
+  * internet connection
 #### Installation
 Clone the repository:
 
-bash Copy code git clone https://github.com/your-username/stopwatch-app.git Open the project in Android Studio. Run the app on your Android device or emulator. Usage Launch the app on your Android device. Press the "Start" button to begin the stopwatch. Press the "Hold" button to pause and resume the stopwatch. Press the "Stop" button to stop the stopwatch. Enjoy the features, and don't forget to explore the background music option! Contributing Contributions are welcome! Please follow the contribution guidelines. License This project is licensed under the MIT License - see the LICENSE file for details. Acknowledgments Background music: Background Song Titl
+1. bash Copy code git clone https://github.com/Bongani-4/OIBSIP_ToDo.git
+2. Open the project in Android Studio.
+3.  Run the app on your Android device or emulator.
+#### Usage 
+1. Launch the app on your Android device.
+2. Press the "Start" button to begin the stopwatch.
+3. Press the "Hold" button to pause and resume the stopwatch.
+4.  Press the "Stop" button to stop the stopwatch.
+5.  Enjoy the features, and don't forget to explore the background music options
+### License 
+This project is licensed - see the LICENSE file for details. 
+
+Acknowledgments Background music: NCS
