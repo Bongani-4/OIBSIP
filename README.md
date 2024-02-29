@@ -14,7 +14,7 @@ A simple Android stopwatch application with additional features.
   #### Prerequisites 
   * Android Studio
   * Android device or emulator
-  * internet connection
+  * Internet connection
 #### Installation
 Clone the repository:
 
