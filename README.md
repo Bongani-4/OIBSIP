@@ -16,7 +16,7 @@
     *   Date and Time: Assign due dates and times to tasks.
     *   Task Types: Categorize tasks based on their type.
     *    Firebase Integration: Store tasks securely in the Firebase Realtime Database.
-    *     User Authentication: Securely manage tasks per user.
+    *  User Authentication: Securely manage tasks per user.
     * Real-time Updates: Fetch and display tasks in real-time.
     #### Getting Started
     ##### Prerequisites
