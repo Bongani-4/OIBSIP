@@ -24,7 +24,7 @@
     * Internet connection
     * Android mobile or emulator
       #### Installation
-      1.  Clone the repository:  Copy code "git clone https://github.com/your-username/todo-application.git"
+      1.  Clone the repository:  Copy code "https://github.com/Bongani-4/OIBSIP_ToDo.git"
       2.   Open the project in Android Studio.
       3.   (if there is googleservice json file error other wise skip this step),Configure Firebase: Create a new Firebase project. then Add an Android app to your Firebase project and follow the setup instructions. Replace the google-services.json file with the one generated for your app.
       4.    Build and run the app on an Android emulator or device.
