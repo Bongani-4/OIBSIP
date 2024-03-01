@@ -13,6 +13,36 @@
     #### Features
 
     <img src="TodoHighlightsS.png" alt="HIghlights" width="820">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     *  **Task Management**: Add, edit, and remove tasks.
     *  **Task Prioritization**: Mark tasks as urgent or not urgent.
     *   **Date and Time**: Assign due dates and times to tasks.
