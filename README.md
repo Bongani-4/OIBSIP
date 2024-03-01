@@ -11,6 +11,8 @@
     #### Introduction
      The Todo Application is a task management app that allows users to organize and prioritize their tasks efficiently. It provides a user-friendly interface to add, view, and manage tasks, with features like setting task urgency, due dates, and task types.
     #### Features
+
+    <img src="images/screenshots/Screenshot_20240129_154130.jpg" alt="Login" width="120">
     *  **Task Management**: Add, edit, and remove tasks.
     *  **Task Prioritization**: Mark tasks as urgent or not urgent.
     *   **Date and Time**: Assign due dates and times to tasks.
