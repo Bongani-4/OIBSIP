@@ -62,10 +62,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".TaskAdapter"
-            android:exported="false"
-            android:label="Add Task" />
+
     </application>
 
 </manifest>

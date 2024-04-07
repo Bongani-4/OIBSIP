@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -24,11 +25,17 @@ import android.content.Context;
 import android.view.View;
 import android.content.res.Resources;
 
+
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
     private List<Task> taskList;
     private int lastColor = -1;
     private OnItemClickListener listener;
+    // Default constructor
+    public TaskAdapter() {
+        // Initialize an empty task list
+        taskList = new ArrayList<>();
+    }
 
     public interface OnItemClickListener{
         void onItemClick(int position);
